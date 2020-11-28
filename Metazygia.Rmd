@@ -1,0 +1,60 @@
+---
+title: <center> Determinantes del área de telas orbiculares en género *Metazygia* (Araneidae) en zona urbana </center>
+author: <center> Barrantes, K </center>
+date: <center> 30/11/2020 </center>
+output:
+  html_document:
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+---
+
+---
+
+# Contexto
+
+El género *Metazygia*, perteneciente a la familia Araneide, consiste principalmente de arañas nocturnas, las cuales se distribuyen en el neotropico y zonas restringidas del neartico. Estas atrapan a sus presas, que principalmente son otros artropodos, creando telas orbiculares donde quedaran adheridas para ser deboradas posteriormente.
+
+&nbsp;
+
+# Pregunta de investigación
+
+Tomando en cuenta los habitos alimenticios del género e individuos que componen su dieta, surge la pregunta **¿Qué variables determinan el área de las telas para el género *Metazygia*?**
+
+&nbsp;
+
+# Variables a tomar en cuentra, relación entre estas e hipotesis
+
+Se deben tomar en cuenta variables que indiquen área de la tela, el grado de iluminación al que esté expuesta la tela, altura y distancia (posición) a la que se encuentre de una fuente de luz y contorno inmediato al que se encuentre expuesta la tela. También se debería obtener valores de cantidad de presas atrapadas y daño causado a las telas por factores externos a las arañas.
+
+- Área = a
+- Luz = l
+- Posición = p
+- Lugar = y
+- Presas = j
+- Daños = d
+
+
+
+
+Se predice que los sitios en los que haya mayor iluminación y por ende, mayor cernanía a fuentes de luz habra mayor cantidad de presas potenciales, por lo que la tela tendrá una menor área que las que se encuentren alejadas de fuentes de luz o en oscuridad, las cuales deberan tener un area superior por la baja densidad de presas.
+
+&nbsp;
+
+# Conjunto de datos
+
+
+# Análisis de datos
+
+
+# Interpretación de resultados
+
+
+&nbsp;
+
+---
+```{r session, echo=FALSE}
+sessionInfo() # Información de la sesión
+```
