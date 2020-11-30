@@ -2,11 +2,12 @@
 
 library(readr)
 Metazygia <- read_delim("Metazygia.csv", 
-                        ";", escape_double = FALSE, col_types = cols(area = col_number(), 
-                                                                     lugar = col_factor(levels = c("bosquecito", 
-                                                                                                   "carteles")), luz = col_logical(), 
-                                                                     posicion = col_factor(levels = c("alto", 
-                                                                                                      "bajo", "medio"))), trim_ws = TRUE)
+                        ";", escape_double = FALSE,
+                        col_types = cols(area = col_number(), 
+                                         lugar = col_factor(levels = c("bosquecito", "carteles")),
+                                         luz = col_logical(), 
+                                         posicion = col_factor(levels = c("alto", "bajo", "medio"))), 
+                        trim_ws = TRUE)
 View(Metazygia)
 
 ####### Supuestos paramétricos
@@ -42,5 +43,56 @@ leveneTest(Metazygia$area ~ Metazygia$posicion) # Las variaciones de las posicio
 
 # No se pueden realizar pruebas paramétricas al incumplir supuestos de normalidad y varianzas.
 
+
+####### DAG
+
+library(dagitty)
+library(ggdag)
+
+
+# Variables que interaccionan en DAG
+# Área = a
+# Luz = l
+# Posición = p
+# Lugar = y
+# Presas = j
+# Daños = d
+
+# Creación de DAG con "a" como outcome o respuesta y "p" como causal o exposure
+DAG <- dagitty("dag{
+             l -> a ;
+             p -> a;
+             y -> a;
+             d -> a;
+             l -> p;
+             p -> d;
+             d -> j;
+             p -> j;
+             a -> j;
+             l -> j;
+             y -> j
+             p [exposure]
+             a [outcome]
+             j [unobserved]
+             d [unobserved]
+             }")
+
+ggdag(DAG, layout = "circle") + theme_dag() # DAG interacciones
+
+adjustmentSets(x = DAG, exposure = "p", outcome = "a", type="all", effect = "total") # El DAG sugire
+                                                                                     # condicionar "l" y "y" 
+
+impliedConditionalIndependencies(x = DAG, type = "missing.edge") # Condiciones de independencia para que
+                                                                 # se cumpla el modelo
+
+impliedConditionalIndependencies(x = DAG, type = "basis.set") # Condiciones de independencia para que
+                                                              # se cumpla el modelo
+
+# Para que se cumpla el DAG debe de haber independencia entre lugar y luz, así como posición y luz
+# siendo necesario condicionar lugar. En los casos en que se toman en cuenta daño (que es inobservable)
+# se debe condicionar posición y en ocaciones lugar.
+
+
+####### Información de sesión
 
 sessionInfo()
